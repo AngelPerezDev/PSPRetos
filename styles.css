@@ -11,5 +11,8 @@ body {
   max-width: 768px;
   margin: 0 auto;
 }
+hr {
+  color: grey;
+}
 
   
