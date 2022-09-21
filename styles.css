@@ -2,11 +2,12 @@ html {
   font-size: 62.5%;
 }
 body {
-  font-size: 1.5em;
-  line-height: 1.6;
-  font-weight: 400;
+ display: block;
   font-family: "Roboto", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #000000;
-  max-width:800px;
   margin:25px auto;
+}
+.contenido{
+  max-width:768px;
+
 }
