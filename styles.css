@@ -1,3 +1,14 @@
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.5em;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: "Roboto", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #000000;
+}
+
 .cuerpo
 {
   display: flex;
@@ -6,39 +17,4 @@
   list-style: none;
   justify-content: space-around;
   width: 200px;
-}
-
-.menu ul 
-{
-  display: flex;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.menu a 
-{
-  display: block;
-  width: 125px;
-  padding: 10 0 10 0;
-  background-color: blue;
-  text-decoration: none;
-  color: white;
-  text-align: center;
-}
-.menu a:hover 
-{
-  background-color: lightgrey;
-  color: black
-}
-.menu ul li ul 
-{
-  display: none;
-}
-.menu ul li a:hover + ul
-{
-  display: block;
-}
-.menu ul li ul:hover
-{
-  display: block;
 }
