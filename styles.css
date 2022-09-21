@@ -5,10 +5,10 @@ body {
  display: block;
   font-family: "Roboto", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #000000;
-  margin:25px auto;
+  margin: 25px auto;
 }
 .contenido {
-  max-width:768px;
+  max-width: 768px;
 }
 
   
