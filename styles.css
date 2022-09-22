@@ -2,11 +2,10 @@ body {
  display: block;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   color: #000000;
-  margin: 25px auto;
 }
 .main {
   text-align: center;
-  padding-top: 20px;
+  padding-top: 10px;
   max-width: 1024px;
   margin: 0 auto;
 }
