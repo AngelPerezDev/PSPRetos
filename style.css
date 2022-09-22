@@ -11,6 +11,29 @@
   font-family: "Roboto", sans-serif;
   color: black;
 }
+.content-info{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: black;
+}
+.content-width{
+  text-align: center;
+  padding-top: 20px;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+.content-info h1{
+  font-size: 60px;
+  margin-bottom: 15px;
+  font-weight: 300
+}
 .content h1 {
   font-size: 60px;
   margin-bottom: 15px;
@@ -20,7 +43,6 @@
   font-size: 42px;
   font-weight: 100;
 }
-
 .menu-container {
   z-index: 2;
   position: relative;
@@ -152,6 +174,15 @@ body.menu-open .plus-btn .r2 {
 }
 .flex-items:hover {
   background-color: #0259a5;
+}
+.flex-items a {
+  color: black;
+}
+.flex-items:hover a{
+  background-color: #0259a5;
+  color: white;
+}
+.flex-items a:hover {
   color: white;
 }
 
@@ -162,4 +193,20 @@ body.menu-open .plus-btn .r2 {
   flex-basis: auto;
   align-self: auto;
   order: 0;
+}
+
+.ir-arribas {
+	display: none;
+	padding:20px;
+	background:#0259a5;
+	font-size:20px;
+	color:#fff;
+	cursor:pointer;
+	position: fixed;
+	bottom:50px;
+	right:50px;
+}
+
+a:link, a:visited, a:active {
+  text-decoration:none;
 }
