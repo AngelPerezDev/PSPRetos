@@ -176,7 +176,7 @@ body.menu-open .plus-btn .r2 {
   line-height: normal;
   position: relative;
   text-align: center;
-  border: 1px solid #cfcfcf;
+  border-left: 1px solid #0259a5;
 }
 .flex-items:hover {
   background-color: #0259a5;
