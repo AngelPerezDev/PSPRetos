@@ -35,11 +35,11 @@ hr {
   right: 0;
   bottom: 0;
   border-radius: 20px;
-  background: #f953c6;
+  background: #53f9ab;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #da2287, #f953c6);
+  background: -webkit-linear-gradient(to right, #22da84, #53f99e);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #da2287, #f953c6);
+  background: linear-gradient(to right, #22da84, #53f99e);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   transform: rotate(0deg);
   transition: all 0.4s cubic-bezier(0.54, -0.1, 0.57, 0.57);
