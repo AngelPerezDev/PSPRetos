@@ -71,6 +71,12 @@
   transition-delay: 0.5s;
   visibility: hidden;
 }
+.menu a {
+  color: white;
+}
+.menu a:hover {
+  color: white;
+}
 .menu ul li {
   font-family: "Roboto", sans-serif;
   font-weight: 100;
@@ -170,7 +176,7 @@ body.menu-open .plus-btn .r2 {
   line-height: normal;
   position: relative;
   text-align: center;
-  border: 1px solid #e3e3e3;
+  border: 1px solid #cfcfcf;
 }
 .flex-items:hover {
   background-color: #0259a5;
@@ -195,12 +201,13 @@ body.menu-open .plus-btn .r2 {
   order: 0;
 }
 
-.ir-arribas {
+.ir-arriba {
 	display: none;
-	padding:20px;
+	padding: 14px 20px;
 	background:#0259a5;
 	font-size:20px;
 	color:#fff;
+  font-weight: bold;
 	cursor:pointer;
 	position: fixed;
 	bottom:50px;
