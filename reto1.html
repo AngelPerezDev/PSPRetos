@@ -1,136 +1,144 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>PSP/Retos/Angel_Perez</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./markdown.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./markdown.css">
+  
 </head>
+
 <body>
-<div class="plus-btn-pos">
-  <div class="plus-btn">
-    <div class="r1"></div>
-    <div class="r2"></div>
-  </div>
-</div>
-<div class="content-info">
-  <div class="content-width">
-    <h1>
-      Reto 1. ArrayList Java Collection
-    </h1>
 
-    //---------------------------
-    <style>
-      .markdown-body {
-        box-sizing: border-box;
-        min-width: 200px;
-        max-width: 980px;
-        margin: 0 auto;
-        padding: 45px;
-      }
+  <div class="content-info">
+    <div class="content-width">
+      <h2>
+        Reto 1 <br>ArrayList Java Collection
+      </h2>
+
+      <!-- Inicio de Markdown -->
+
+      <div class="mume markdown-preview  ">
+        <h1 class="mume-header" id="%C3%ADndice">&#xCD;ndice</h1>
     
-      @media (max-width: 767px) {
-        .markdown-body {
-          padding: 15px;
-        }
-      }
-    </style>
-    <article class="markdown-body">
-      <h1>Unicorns</h1>
-      <p>All the things</p>
+        <ul>
+          <li><a href="#%C3%ADndice">&#xCD;ndice</a></li>
+          <li><a href="#definici%C3%B3n-y-creaci%C3%B3n-de-un-arraylist">Definici&#xF3;n y creaci&#xF3;n de un ArrayList</a>
+          </li>
+          <li><a href="#m%C3%A9todos-y-propiedades-generales">M&#xE9;todos y propiedades generales</a></li>
+          <li><a href="#a%C3%B1adir-datos-a-la-colecci%C3%B3n">A&#xF1;adir datos a la colecci&#xF3;n</a></li>
+          <li><a href="#recorrer-la-colecci%C3%B3n">Recorrer la colecci&#xF3;n</a></li>
+          <li><a href="#b%C3%BAsqueda-de-elementos">B&#xFA;squeda de elementos</a></li>
+          <li><a href="#obtenci%C3%B3n-de-subcolecciones">Obtenci&#xF3;n de subcolecciones</a></li>
+          <li><a href="#ordenaci%C3%B3n-de-elementos">Ordenaci&#xF3;n de elementos</a></li>
+          <li><a href="#webgraf%C3%ADa">Webgraf&#xED;a</a></li>
+        </ul>
+        <p><a name="definicion" href></a></p>
+        <h1 class="mume-header" id="definici%C3%B3n-y-creaci%C3%B3n-de-un-arraylist">Definici&#xF3;n y creaci&#xF3;n de un
+          ArrayList</h1>
+    
+        <p>La clase ArrayList en Java permite almacenar datos en memoria de forma similar a los Arrays con la ventaja de que
+          el numero de elementos que almacena lo hace de forma <strong>din&#xE1;mica</strong>, es decir, que <strong>no es
+            necesario declarar su tama&#xF1;o como pasa con los Arrays.</strong> Los elementos pueden a&#xF1;adirse o
+          eliminarse seg&#xFA;n necesidad.</p>
+        <p>La clase Arraylist implementa la interface List, la cual extiende la interface <code>java.util.Collection</code>.
+        </p>
+        <p><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200624184403/ArrayList.png"
+            alt="Esquema ArrayList - Collection"></p>
+        <p>Para crear un ArrayList, podemos importar o bien solo la clase <code>java.util.ArrayList</code> o todo el paquete
+          <code>java.util</code>. Un ArrayList se puede declarar de diferentes elementos u objetos (String, Integer, float,
+          Boolean, Object...).</p>
+        <p>Para el ejemplo que vamos a seguir en este manual, declararemos un objeto ArrayList al que llamaremos
+          <em>coches</em> y en el que almacenaremos strings de la siguiente manera:</p>
+        <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token keyword keyword-import">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span><span class="token punctuation">;</span> <span class="token comment">// Importamos la clase ArrayList</span>
+    
+    <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> coches <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Creamos el objeto ArrayList</span>
+    </pre>
+        <p><a name="metodos_y_propiedades" href></a></p>
+        <h1 class="mume-header" id="m%C3%A9todos-y-propiedades-generales">M&#xE9;todos y propiedades generales</h1>
+    
+        <p><a name="a&#xF1;adir" href></a></p>
+        <h1 class="mume-header" id="a%C3%B1adir-datos-a-la-colecci%C3%B3n">A&#xF1;adir datos a la colecci&#xF3;n</h1>
+    
+        <p><a name="recorrer" href></a></p>
+        <h1 class="mume-header" id="recorrer-la-colecci%C3%B3n">Recorrer la colecci&#xF3;n</h1>
+    
+        <p><a name="buscar" href></a></p>
+        <h1 class="mume-header" id="b%C3%BAsqueda-de-elementos">B&#xFA;squeda de elementos</h1>
+    
+        <p><a name="subcolecciones" href></a></p>
+        <h1 class="mume-header" id="obtenci%C3%B3n-de-subcolecciones">Obtenci&#xF3;n de subcolecciones</h1>
+    
+        <p><a name="ordenar" href></a></p>
+        <h1 class="mume-header" id="ordenaci%C3%B3n-de-elementos">Ordenaci&#xF3;n de elementos</h1>
+    
+        <p><a name="webgraf&#xED;a" href></a></p>
+        <h1 class="mume-header" id="webgraf%C3%ADa">Webgraf&#xED;a</h1>
+    
+        <ul>
+          <li><a
+              href="https://www.geeksforgeeks.org/arraylist-in-java/?ref=lbp">https://www.geeksforgeeks.org/arraylist-in-java/?ref=lbp</a>
+          </li>
+          <li><a
+              href="https://www.w3schools.com/java/java_arraylist.asp">https://www.w3schools.com/java/java_arraylist.asp</a>
+          </li>
+          <li><a href="https://guru99.es/how-to-use-arraylist-in-java/">https://guru99.es/how-to-use-arraylist-in-java/</a>
+          </li>
+          <li><a
+              href="https://www.javadevjournal.com/java/java-arraylist/">https://www.javadevjournal.com/java/java-arraylist/</a>
+          </li>
+        </ul>
+    
+      </div>
 
-
-
-      <h1 id="what-is-markdown">What is Markdown?</h1>
-      <blockquote>
-      <p>Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).</p>
-      </blockquote>
-      <p>Source: <a href="http://daringfireball.net/projects/markdown/">http://daringfireball.net/projects/markdown/</a></p>
-      <h1 id="installation">Installation</h1>
-      <p>The plugin is <a href="http://plugins.netbeans.org/plugin/50964/markdown-support">available</a> in the official NetBeans Plugin Portal Update Center.</p>
-      <p>You can also download a pre-packaged release:</p>
-      <ul>
-      <li>https://github.com/madflow/flow-netbeans-markdown/releases (list of all releases)</li>
-      <li>https://github.com/madflow/flow-netbeans-markdown/releases/download/2.3.1/flow-netbeans-markdown.nbm (<strong>note:</strong> version 2.3.1)</li>
-      </ul>
-      <p>Install the plugin with: <code>Tools -&gt; Plugins -&gt; Downloaded</code></p>
-      <p>You may also compile a binary yourself with the <strong>latest development code</strong>.</p>
-      <ol>
-      <li>git clone git://github.com/madflow/flow-netbeans-markdown.git</li>
-      <li>Open the folder with NetBeans (Open Project)</li>
-      <li>(Configure Target Platform if needed)</li>
-      <li>Choose &quot;Create NBM&quot; from the project menu</li>
-      <li>Install the plugin with: Tools -&gt; Plugins -&gt; Downloaded</li>
-      </ol>
-      <h1 id="requirements">Requirements</h1>
-      <ul>
-      <li>NetBeans &gt;= 8.0</li>
-      <li>&quot;NetBeans Plugin Development&quot; plugin must be installed if you want to compile your own binary package.</li>
-      </ul>
-      <h1 id="plugin-features">Plugin features</h1>
-      <ul>
-      <li>Adds Markdown to your &quot;New File&quot; wizard</li>
-      <li>Provides basic syntax highlighting</li>
-      <li>Provides code folding based on headers</li>
-      <li>Provides bread crumbs in the editor based on headers</li>
-      <li>Provides a table of contents in the Navigator window</li>
-      <li>Enables full fledged preview in the editor window</li>
-      <li>Exports your saved file content to an HTML document</li>
-      <li>Enables HTML preview of your saved file in your configured web browser</li>
-      <li>Lets you customize the HTML output with CSS and alien intelligence (Options-&gt;Miscellaneous-&gt;Markdown-&gt;HTML Export)</li>
-      <li>Supports multiple extensions over standard markdown (see <a href="https://github.com/sirthias/pegdown">PegDown</a>, Options-&gt;Miscellaneous-&gt;Markdown-&gt;Extensions)</li>
-      <li>Supports auto operations(additoin and removal) for lists (Options-&gt;Miscellaneous-&gt;Markdown-&gt;Miscellaneous)</li>
-      </ul>
-      <h1 id="screenshots">Screenshots</h1>
-      <p><img src="editor-source.png" alt="Editor - Source view" title="The Source view of the Markdown editor"></p>
-      <hr>
-      <p><img src="editor-preview.png" alt="Editor - Preview view" title="The Preview view of the Markdown editor"></p>
-      <h1 id="resources">Resources</h1>
-      <ul>
-      <li><a href="https://github.com/sirthias/pegdown">PegDown</a> : A pure-Java Markdown processor based on a parboiled PEG parser supporting a number of extensions.</li>
-      <li>http://daringfireball.net/projects/markdown/ : Home of the Markdown (Basics, Syntax)</li>
-      <li>http://openiconlibrary.sourceforge.net/ : Icons</li>
-      <li><a href="http://dcurt.is/the-markdown-mark">Markdown Mark</a> : A graphic element to identify Markdown files created by <a href="http://dustincurtis.com/">Dustin Curtis</a> (<a href="https://github.com/dcurtis/markdown-mark">Github repo</a>)</li>
-      </ul>
-//------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   </div>
-</div>
-
-<span class="ir-arriba">^</span>
-
-<div class="menu-container">
-  <div class="menu-sliders"></div>
-  <div class="menu-sliders"></div>
-  <div class="menu-sliders"></div>
-  <div class="menu">
-    <ul>
-      <li>
-        <a href="index.html">Inicio</a>
-      </li>
-      <li>
-        <a>Reto 1. ArrayList Java Collection</a>
-      </li>
-    </ul>
+      <!-- Fin de Markdown -->
+      
+    </div>
   </div>
-</div>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="./script.js"></script>
+  <!-- Inicio de Botón de menú -->
+
+  <div class="plus-btn-pos">
+    <div class="plus-btn">
+      <div class="r1"></div>
+      <div class="r2"></div>
+    </div>
+  </div>
+
+  <!-- Fin de Botón de menú -->
+
+  <!-- Inicio Menú -->
+
+  <div class="menu-container">
+    <div class="menu-sliders"></div>
+    <div class="menu-sliders"></div>
+    <div class="menu-sliders"></div>
+    <div class="menu">
+      <ul>
+        <li>
+          <a href="index.html">Inicio</a>
+        </li>
+        <li>
+          <a href="reto1.html">Reto 1. ArrayList Java Collection</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Fin Menú -->
+
+  <!-- Inicio de Botón Up -->
+
+  <span class="ir-arriba">^</span>
+
+  <!-- Fin de Botón Up -->
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="./script.js"></script>
 
 </body>
+
 </html>
