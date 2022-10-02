@@ -1,4 +1,4 @@
-### Manual de la clase ArrayList de Java para su uso durante el examen de la asignatura Programación de Servicios y Procesos.
+# Manual de la clase ArrayList de Java para su uso durante el examen de la asignatura Programación de Servicios y Procesos.
 
 Este manual incluye:
 
@@ -19,4 +19,4 @@ Este manual incluye:
     - Con API Stream
 - Webgrafía
 
-Desarrollado en HTML, CSS y JS con posibilidad de ampliación.
+> Desarrollado en HTML, CSS y JS con posibilidad de ampliación.
