@@ -49,6 +49,9 @@
   font-size: 42px;
   font-weight: 100;
 }
+
+/* Inicio menu*/
+
 .menu-container {
   z-index: 2;
   position: relative;
@@ -207,6 +210,10 @@ body.menu-open .plus-btn .r2 {
   order: 0;
 }
 
+/* Fin menu*/
+
+/* Inicio boton UP*/
+
 .ir-arriba {
 	display: none;
 	padding: 14px 20px;
@@ -223,3 +230,5 @@ body.menu-open .plus-btn .r2 {
 a:link, a:visited, a:active {
   text-decoration:none;
 }
+
+/* Fin boton UP*/

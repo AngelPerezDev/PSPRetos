@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./markdown.css">
-  
 </head>
 
 <body>
@@ -20,82 +19,600 @@
       </h2>
 
       <!-- Inicio de Markdown -->
-
       <div class="mume markdown-preview  ">
-        <h1 class="mume-header" id="%C3%ADndice">&#xCD;ndice</h1>
+        <p>&#x1F4C1; <a href="./reto1_arraylist.pdf">Descargar en PDF</a></p>
+  <h1 class="mume-header" id="%C3%ADndice">&#xCD;ndice</h1>
+  
+  <ul>
+  <li><a href="#%C3%ADndice">&#xCD;ndice</a></li>
+  <li><a href="#definici%C3%B3n-y-creaci%C3%B3n-de-un-arraylist">Definici&#xF3;n y creaci&#xF3;n de un ArrayList</a></li>
+  <li><a href="#m%C3%A9todos-y-propiedades-generales">M&#xE9;todos y propiedades generales</a></li>
+  <li><a href="#a%C3%B1adir-datos-a-la-colecci%C3%B3n">A&#xF1;adir datos a la colecci&#xF3;n</a>
+  <ul>
+  <li><a href="#a%C3%B1adir-elementos-desde-el-constructor">A&#xF1;adir elementos desde el constructor</a></li>
+  <li><a href="#a%C3%B1adir-elementos-a-partir-de-otras-colecciones">A&#xF1;adir elementos a partir de otras colecciones</a></li>
+  <li><a href="#a%C3%B1adir-elementos-mediante-c%C3%B3digo">A&#xF1;adir elementos mediante c&#xF3;digo</a></li>
+  <li><a href="#eliminar-elementos-mediante-c%C3%B3digo">Eliminar elementos mediante c&#xF3;digo</a></li>
+  </ul>
+  </li>
+  <li><a href="#recorrer-la-colecci%C3%B3n">Recorrer la colecci&#xF3;n</a></li>
+  <li><a href="#b%C3%BAsqueda-de-elementos">B&#xFA;squeda de elementos</a></li>
+  <li><a href="#obtenci%C3%B3n-de-subcolecciones">Obtenci&#xF3;n de subcolecciones</a></li>
+  <li><a href="#ordenaci%C3%B3n-de-elementos">Ordenaci&#xF3;n de elementos</a>
+  <ul>
+  <li><a href="#con-funciones-de-collection">Con funciones de Collection</a></li>
+  <li><a href="#con-expresiones-lambda">Con expresiones lambda</a></li>
+  <li><a href="#con-api-stream">Con API Stream</a></li>
+  </ul>
+  </li>
+  <li><a href="#webgraf%C3%ADa">Webgraf&#xED;a</a></li>
+  </ul>
+  <p><a name="definicion" href></a></p>
+  <h1 class="mume-header" id="definici%C3%B3n-y-creaci%C3%B3n-de-un-arraylist">Definici&#xF3;n y creaci&#xF3;n de un ArrayList</h1>
+  
+  <p>La clase ArrayList en Java permite almacenar datos en memoria de forma similar a los Arrays con la ventaja de que el numero de elementos que almacena lo hace de forma <strong>din&#xE1;mica</strong>, es decir, que <strong>no es necesario declarar su tama&#xF1;o como pasa con los Arrays.</strong> Los elementos pueden a&#xF1;adirse o eliminarse seg&#xFA;n necesidad.</p>
+  <p>La clase Arraylist implementa la interface List, la cual extiende la interface <code>java.util.Collection</code>.</p>
+  <p><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200624184403/ArrayList.png" alt="Esquema ArrayList - Collection"></p>
+  <p>Para crear un ArrayList, podemos importar o bien solo la clase <code>java.util.ArrayList</code> o todo el paquete <code>java.util</code>. Un ArrayList se puede declarar de diferentes elementos u objetos (String, Integer, float, Boolean, Object...). Adem&#xE1;s <strong>existen 3 sobrecargas del constructor</strong> que veremos a continuaci&#xF3;n.</p>
+  <p>Para el ejemplo que vamos a seguir en este manual, utlizaremos el IDE Netbeans y declararemos un ArrayList de objetos <em>Coche</em> al que llamaremos <em>garaje</em> y en el que almacenaremos objetos de la clase <em>Coche</em>, la cual deberemos de crear tambi&#xE9;n con el siguiente c&#xF3;digo:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"> <span class="token comment">// Creamos una clase Coche que usaremos para el ejemplo y</span>
+   <span class="token comment">// se guardar&#xE1; en Coche.java</span>
+  <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">Coche</span>
+  <span class="token punctuation">{</span>
+      <span class="token comment">//Atributos de la clase</span>
+      <span class="token keyword keyword-private">private</span> <span class="token class-name">String</span> marca<span class="token punctuation">;</span>
+      <span class="token keyword keyword-private">private</span> <span class="token class-name">String</span> modelo<span class="token punctuation">;</span>
+      <span class="token keyword keyword-private">private</span> <span class="token class-name">String</span> version<span class="token punctuation">;</span>
+      <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-double">double</span> precio<span class="token punctuation">;</span>
+  
+      <span class="token comment">//Constructor con el mismo nombre de la clase</span>
+      <span class="token keyword keyword-public">public</span> <span class="token class-name">Coche</span><span class="token punctuation">(</span><span class="token class-name">String</span> marca<span class="token punctuation">,</span> 
+                    <span class="token class-name">String</span> modelo<span class="token punctuation">,</span> 
+                    <span class="token class-name">String</span> version<span class="token punctuation">,</span> 
+                    <span class="token keyword keyword-double">double</span> precio<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>marca <span class="token operator">=</span> marca<span class="token punctuation">;</span>
+          <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>modelo <span class="token operator">=</span> modelo<span class="token punctuation">;</span>
+          <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>version <span class="token operator">=</span> version<span class="token punctuation">;</span>
+          <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>precio <span class="token operator">=</span> precio<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  
+      <span class="token comment">//M&#xE9;todos de la clase</span>
+      <span class="token keyword keyword-public">public</span> <span class="token class-name">String</span> <span class="token function">getMarca</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword keyword-return">return</span> marca<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  
+      <span class="token keyword keyword-public">public</span> <span class="token class-name">String</span> <span class="token function">getModelo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword keyword-return">return</span> modelo<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  
+      <span class="token keyword keyword-public">public</span> <span class="token class-name">String</span> <span class="token function">getVersion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword keyword-return">return</span> version<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  
+      <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-double">double</span> <span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword keyword-return">return</span> precio<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  
+      <span class="token comment">//String de la clase</span>
+      <span class="token annotation punctuation">@Override</span>
+      <span class="token keyword keyword-public">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword keyword-return">return</span> <span class="token string">&quot;Coche: &quot;</span> <span class="token operator">+</span> marca <span class="token operator">+</span> <span class="token string">&quot; / &quot;</span> 
+                            <span class="token operator">+</span> modelo <span class="token operator">+</span> <span class="token string">&quot; / &quot;</span> 
+                            <span class="token operator">+</span> version <span class="token operator">+</span> <span class="token string">&quot; / &quot;</span> 
+                            <span class="token operator">+</span> precio<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> 
+  <span class="token punctuation">}</span>
+  </pre><p>Una vez creada la clase <em>Coche</em>, declaramos el ArrayList <em>garaje</em> y le a&#xF1;adimos 3 coches de la siguiente manera:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// SOBRECARGA 1</span>
+  
+  <span class="token comment">// Importamos la clase ArrayList</span>
+  <span class="token keyword keyword-import">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span><span class="token punctuation">;</span> 
+  
+  <span class="token comment">// Creamos 3 objetos Coche</span>
+  <span class="token class-name">Coche</span> seatArosa <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Coche</span><span class="token punctuation">(</span><span class="token string">&quot;Seat&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Arosa&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2.0&quot;</span><span class="token punctuation">,</span> <span class="token number">25000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">Coche</span> fordFocus <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Coche</span><span class="token punctuation">(</span><span class="token string">&quot;Ford&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Focus&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;1600&quot;</span><span class="token punctuation">,</span> <span class="token number">21000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">Coche</span> audiA4 <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Coche</span><span class="token punctuation">(</span><span class="token string">&quot;Audi&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;A4&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;v6&quot;</span><span class="token punctuation">,</span> <span class="token number">45000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Creamos un ArrayList garaje al que le a&#xF1;adimos los 3 coches</span>
+  <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span> garaje <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  </pre><p>Al hacerlo de esta manera, estamos creando un ArrayList sin longitud, es decir, es una lista vac&#xED;a, aunque por defecto tiene una capacidad de 10. Esto no quiere decir que s&#xF3;lo podamos a&#xF1;adir 10 objetos, sino que se dimensiona con una capacidad de 10 para optimizar recursos (aunque la lista est&#xE1; vac&#xED;a, si se consultara el tama&#xF1;o de la lista ser&#xED;a 0). Si m&#xE1;s adelante queremos a&#xF1;adir objetos, el ArrayList es capaz de redimensionarse.</p>
+  <p>Vamos ahora a a&#xF1;adir los 3 coches creados y a mostrar que est&#xE1;n en la lista:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java">garaje<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>seatArosa<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// A&#xF1;adimos elementos a la lista garaje</span>
+  garaje<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>fordFocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  garaje<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>audiA4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token comment">// Recorremos el ArrayList y mostramos sus objetos</span>
+  <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p>Si por el contrario, quisieramos darle una longitud inicial al ArrayList, la declaraci&#xF3;n ser&#xED;a la siguiente:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// SOBRECARGA 2</span>
+  
+  <span class="token comment">// Creamos el objeto ArrayList con una capacidad de 30</span>
+  <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span> garaje <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  </pre><p>Si sabemos de antemano cual va a ser la capacidad que se necesita de ArrayList, es mejor crearlo de esta manera, ya que aunque un ArrayList es una lista din&#xE1;mica y permite el crecimiento agregando elementos, conlleva un coste muy alto de recursos cada vez que se redimensiona.</p>
+  <p>Existe una tercera sobrecarga del constructor <code>ArrayList(Collection&lt;? extends E&gt; c)</code> donde podemos crear/aumentar el ArrayList pas&#xE1;ndole una colecci&#xF3;n espec&#xED;fica. De esta manera, el ArrayList se generar&#xE1; con los valores de dicha colecci&#xF3;n seg&#xFA;n se los vaya pasando el iterador. Por ejemplo:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// SOBRECARGA 3</span>
+  
+  <span class="token comment">// Creamos una lista parking a partir de la lista garaje</span>
+  <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span> parking <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>garaje<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Mostramos la lista parking donde se ve que tiene los </span>
+  <span class="token comment">// mismos coches que el ArrayList garaje</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> parking<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p><a name="metodos_y_propiedades" href></a></p>
+  <h1 class="mume-header" id="m%C3%A9todos-y-propiedades-generales">M&#xE9;todos y propiedades generales</h1>
+  
+  <p>En la documentaci&#xF3;n oficial de Oracle se pueden encontrar todos los m&#xE9;todos de la <code>Class ArrayList&lt;E&gt;</code> (<a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#ArrayList-java.util.Collection-">https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#ArrayList-java.util.Collection-</a>). En este manual indicamos los m&#xE1;s utilizados que son:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// A&#xF1;adir un objeto Coche al final del ArrayList</span>
+  garaje<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>fordFocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// A&#xF1;ade el elemento al ArrayList en la posici&#xF3;n &apos;n&apos;</span>
+  garaje<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> setArosa<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Devuelve el numero de elementos del ArrayList</span>
+  garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Devuelve el elemento que esta en la posici&#xF3;n &apos;2&apos; del ArrayList</span>
+  garaje<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Comprueba si existe del objeto Coche que se le pasa como parametro</span>
+  garaje<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>audiA4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Devuelve la posici&#xF3;n del primer objeto Coche fordFocus encontrado en el ArrayList  </span>
+  garaje<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>fordFocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Devuelve la posici&#xF3;n del &#xFA;ltimo objeto Coche fordFocus en el ArrayList   </span>
+  garaje<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span>fordFocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Borra el elemento de la posici&#xF3;n &apos;2&apos; del ArrayList   </span>
+  garaje<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  
+  <span class="token comment">// Borra el primer objeto Coche fordFocus encontrado en el ArrayList que se le pasa como parametro.  </span>
+  garaje<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>fordFocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">//Borra todos los elementos de ArrayList   </span>
+  garaje<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Devuelve True si el ArrayList esta vacio. Sino Devuelve False   </span>
+  garaje<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  
+  <span class="token comment">// Pasa el ArrayList a un Array </span>
+  <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">toArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   
+  </pre><p><a name="a&#xF1;adir" href></a></p>
+  <h1 class="mume-header" id="a%C3%B1adir-datos-a-la-colecci%C3%B3n">A&#xF1;adir datos a la colecci&#xF3;n</h1>
+  
+  <p>Aunque previamente hemos mostrado algunos m&#xE9;todos para a&#xF1;adir y eliminar datos, vamos a describirlos con m&#xE1;s detalle en este ep&#xED;grafe.</p>
+  <h3 class="mume-header" id="a%C3%B1adir-elementos-desde-el-constructor">A&#xF1;adir elementos desde el constructor</h3>
+  
+  <p>La clase ArrayList es una colecci&#xF3;n que no permite desde los constructores 1 <code>public ArrayList()</code> y 2 <code>public ArrayList(int initialCapacity)</code> a&#xF1;adir elementos en su creaci&#xF3;n.</p>
+  <h3 class="mume-header" id="a%C3%B1adir-elementos-a-partir-de-otras-colecciones">A&#xF1;adir elementos a partir de otras colecciones</h3>
+  
+  <p>S&#xF3;lo a trav&#xE9;s del constructor 3 <code>public ArrayList(Collection&lt;? extends E&gt; c)</code> es posible, tal y como hemos visto en el ejemplo anterior:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Creamos una lista parking a partir de la lista garaje</span>
+  <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span> parking <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>garaje<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Mostramos la lista parking donde se ve que tiene los mismos coches </span>
+  <span class="token comment">// que el ArrayList garaje</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> parking<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><h3 class="mume-header" id="a%C3%B1adir-elementos-mediante-c%C3%B3digo">A&#xF1;adir elementos mediante c&#xF3;digo</h3>
+  
+  <p>Aun con todo lo anterior, lo interesante de los ArrayList es su <strong>capacidad de adaptaci&#xF3;n a a&#xF1;adir nuevos elementos a la lista</strong>. Por tanto, sea cual sea la forma en la que hemos creado el ArrayList, podemos a&#xF1;adir elementos a la misma con los siguiente m&#xE9;todos:</p>
+  <p>&#x270F;&#xFE0F; <strong>.add(E e)</strong></p>
+  <p>El m&#xE9;todo <code>.add(E e)</code> a&#xF1;ade el elemento que indiquemos en su argumento al final del ArrayList e incrementa su longitud en +1:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje. Nos devolver&#xE1; valor = 3</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Creamos un nuevo objeto Coche</span>
+  <span class="token class-name">Coche</span> opelCorsa <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Coche</span><span class="token punctuation">(</span><span class="token string">&quot;Opel&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Corsa&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2000&quot;</span><span class="token punctuation">,</span> <span class="token number">27000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// A&#xF1;adimos el nuevo Coche al ArrayList</span>
+  garaje<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>opelCorsa<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos de nuevo la cantidad de elementos del ArrayList</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>.add(int index, E element)</strong></p>
+  <p>El m&#xE9;todo <code>.add(int index, E element)</code> es una variante del anterior en donde podemos especificar en el primer argumento la posici&#xF3;n en la que queremos insertar el nuevo elemento dentro del ArrayList:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje. Nos devolver&#xE1; valor = 4</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">// Creamos un nuevo objeto Coche</span>
+  <span class="token class-name">Coche</span> hondaAccord <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Coche</span><span class="token punctuation">(</span><span class="token string">&quot;Honda&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Accord&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;1800&quot;</span><span class="token punctuation">,</span> <span class="token number">31000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// A&#xF1;adimos el nuevo Coche al ArrayList en la posici&#xF3;n 2</span>
+  garaje<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> hondaAccord<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos de nuevo la cantidad de elementos del ArrayList para ver que se ha incrementado en 1</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos y comprobar </span>
+  <span class="token comment">// que en la posici&#xF3;n 2 se encuentra el nuevo coche</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>.addAll(Collection&lt;? extends E&gt; c)</strong></p>
+  <p>El m&#xE9;todo <code>.addAll(Collection&lt;? extends E&gt; c)</code> a&#xF1;ade una lista completa de elementos que indiquemos en su argumento al final del ArrayList e incrementa su longitud en la misma cantidad de elementos que tiene la lista del argumento:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje. Nos devolver&#xE1; valor = 5</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos la cantidad de elementos del ArrayList parking. Nos devolver&#xE1; valor = 3</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> parking<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList parking es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Aplicamos el m&#xE9;todo</span>
+  garaje<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>parking<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos de nuevo la cantidad de elementos del ArrayList</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>.addAll(int index, Collection&lt;? extends E&gt; c)</strong></p>
+  <p>El m&#xE9;todo <code>.addAll(int index, Collection&lt;? extends E&gt; c)</code> es una variante del anterior en donde podemos especificar en el primer argumento la posici&#xF3;n en la que queremos insertar la lista de elementos dentro del ArrayList:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje. Nos devolver&#xE1; valor = 8</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos la cantidad de elementos del ArrayList parking. Nos devolver&#xE1; valor = 3</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> parking<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList parking es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">// Aplicamos el m&#xE9;todo insertando la lista en la posici&#xF3;n 2</span>
+  garaje<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> parking<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos de nuevo la cantidad de elementos del ArrayList</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><h3 class="mume-header" id="eliminar-elementos-mediante-c%C3%B3digo">Eliminar elementos mediante c&#xF3;digo</h3>
+  
+  <p>De la misma manera que a&#xF1;adir elementos a ArrayList es lo que lo hace interesante, tambi&#xE9;n tiene la capacidad de poder eliminarlos. Hay <strong>5 m&#xE9;todos</strong> para eliminar elementos de un ArrayList:</p>
+  <p>&#x270F;&#xFE0F; <strong>.remove(int index)</strong></p>
+  <p>El m&#xE9;todo <code>.remove(int index)</code> elimina el elemento que se encuentra en la posici&#xF3;n que le indiquemos del ArrayList:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje. Nos devolver&#xE1; valor = 11</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">// Eliminamos el elemento de la posici&#xF3;n 2</span>
+  garaje<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos de nuevo la cantidad de elementos del ArrayList</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>.remove(Object o)</strong></p>
+  <p>El m&#xE9;todo <code>.remove(Object o)</code> elimina el primer elemento del ArrayList que coincide con el elemento pasado como argumento al m&#xE9;todo:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje.</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">// Eliminamos el elemento fordFocus</span>
+  garaje<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>fordFocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos de nuevo la cantidad de elementos del ArrayList</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>.removeAll(Collection&lt;?&gt; c)</strong></p>
+  <p>El m&#xE9;todo <code>.removeAll(Collection&lt;?&gt; c)</code> elimina del ArrayList todos aquellos elementos que coinciden con los indicados en la lista que pasamos como argumento al m&#xE9;todo:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje.</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">// Eliminamos la lista parking</span>
+  garaje<span class="token punctuation">.</span><span class="token function">removeAll</span><span class="token punctuation">(</span>parking<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos de nuevo la cantidad de elementos del ArrayList</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>.removeRange(int fromIndex, int toIndex)</strong></p>
+  <p>El m&#xE9;todo <code>.removeRange(int fromIndex, int toIndex)</code> elimina del ArrayList todos aquellos elementos que se encuentran entre la posici&#xF3;n inicial <code>fromIndex</code> y la posici&#xF3;n final <code>toIndex</code>:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje.</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// A&#xF1;adimos la lista parking para incrementar la cantidad de elementos en ArrayList</span>
+  garaje<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>parking<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">// Eliminamos de la posici&#xF3;n 1 a 3</span>
+  garaje<span class="token punctuation">.</span><span class="token function">removeRange</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos de nuevo la cantidad de elementos del ArrayList</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>.removeIf(Predicate&lt;? super E&gt; filter)</strong></p>
+  <p>El m&#xE9;todo <code>.removeIf(Predicate&lt;? super E&gt; filter)</code> elimina del ArrayList todos aquellos elementos que cumplen con el predicado (la condici&#xF3;n) descrita como argumento en el m&#xE9;todo e indicada como expresi&#xF3;n lambda:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje.</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// A&#xF1;adimos la lista parking para incrementar la cantidad de elementos en ArrayList</span>
+  garaje<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>parking<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">// Eliminamos aquellos que tengan un precio &gt; 30000</span>
+  garaje<span class="token punctuation">.</span><span class="token function">removeIf</span><span class="token punctuation">(</span>coche <span class="token operator">-&gt;</span> <span class="token punctuation">(</span>coche<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">30000</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Revisamos de nuevo la cantidad de elementos del ArrayList</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList para que nos muestre sus elementos</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token class-name">Coche</span> coche <span class="token operator">:</span> garaje<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p><a name="recorrer" href></a></p>
+  <h1 class="mume-header" id="recorrer-la-colecci%C3%B3n">Recorrer la colecci&#xF3;n</h1>
+  
+  <p>Aunque ya hemos visto a lo largo de este manual una forma de recorrer un ArrayList, vamos a explicar en este ep&#xED;grafe las distintas maneras que tenemos de obtener los datos que contiene el mismo:</p>
+  <p>&#x270F;&#xFE0F; <strong>Bucle for</strong></p>
+  <p>El bucle <code>for</code> recorre el ArrayList posici&#xF3;n a posici&#xF3;n. Podemos recorrerlo entre las posiciones que indiquemos o especificar que lo recorra hasta el final con la propiedad <code>.size()</code>:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje.</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// A&#xF1;adimos la lista parking para incrementar la cantidad de elementos en ArrayList</span>
+  garaje<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>parking<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos el ArrayList desde la posici&#xF3;n 1 a 3</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;=</span><span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>garaje<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">// Recorremos el ArrayList completo</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>garaje<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>M&#xE9;todo .forEach()</strong></p>
+  <p>El m&#xE9;todo <code>.forEach()</code> nos permite simplificar el c&#xF3;digo cuando queremos recorrer por completo el ArrayList:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje.</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Recorremos todo el ArrayList con una expresi&#xF3;n lambda</span>
+  garaje<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>M&#xE9;todo .iterator()</strong></p>
+  <p>El m&#xE9;todo <code>.iterator()</code> es una construcci&#xF3;n que se utiliza para recorrer colecciones. Es aplicable a ArrayList:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Revisamos la cantidad de elementos del ArrayList garaje.</span>
+  <span class="token keyword keyword-int">int</span> cantidadElementosEnArrayList <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La cantidad de elementos en el ArrayList garaje es: &quot;</span> 
+                      <span class="token operator">+</span> cantidadElementosEnArrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Generamos el Iterator y lo arrancamos con un bucle while</span>
+  <span class="token class-name">Iterator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span> it <span class="token operator">=</span> garage<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword keyword-while">while</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>Con expresiones lambda</strong></p>
+  <p>En el caso de recorrer un ArrayList completo, las expresiones lambda solo se utilizan junto con el m&#xE9;todo <code>.forEach()</code> tal y como hemos visto. La expresi&#xF3;n lambda que hay que utilizar es</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token punctuation">(</span>coche<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span>
+  </pre><p>En ella se indica que para cada elemento de la lista (que se le ha nombrado con la variable <code>coche</code> pero podr&#xED;a ser cualquier otro nombre) se realice la acci&#xF3;n <code>System.out.println</code>.</p>
+  <p>Es en la b&#xFA;squeda de elementos concretos donde estas expresiones tienen m&#xE1;s potencial. Esto lo veremos en el siguiente punto.</p>
+  <p><a name="buscar" href></a></p>
+  <h1 class="mume-header" id="b%C3%BAsqueda-de-elementos">B&#xFA;squeda de elementos</h1>
+  
+  <p>&#x270F;&#xFE0F; <strong>Con un bucle (for / foreach / Iterator)</strong></p>
+  <p>Combinando un bucle <code>for / foreach / Iterator</code> junto con un condicional <code>if</code>, nos permite hacer una b&#xFA;squeda dentro del ArrayList y cuando salte la condici&#xF3;n, realizar la acci&#xF3;n que programemos:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Hacemos un bucle for de principio a fin y dentro realizamos un if</span>
+  <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>garaje<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+          <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>coche<span class="token punctuation">.</span><span class="token function">getMarca</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;Ford&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+                  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>   
+  </pre><p>&#x270F;&#xFE0F; <strong>Con expresiones lambda</strong></p>
+  <p>Con la misma funcionalidad que el anterior pero con menos c&#xF3;digo, existe una variante del m&#xE9;todo <code>.foreach()</code> en la que podemos especificar mediante expresiones lambda una condici&#xF3;n que en caso de cumplirse nos permita realizar sobre ella la acci&#xF3;n que explicitemos, en este caso es un sencillo <code>System.out.println</code>:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Condicionamos la busqueda a mostrar aquellos que sean marca Ford</span>
+  garaje<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+              <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>coche<span class="token punctuation">.</span><span class="token function">getMarca</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;Ford&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+                  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p>&#x270F;&#xFE0F; <strong>Con API Stream</strong></p>
+  <p>Los API Stream nos permiten aplicar la llamada <em>Programaci&#xF3;n Funcional</em> a la b&#xFA;squeda de un elemento en un ArrayList mediante el uso de <code>.filter</code> que se apoya en expresiones lambda:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Condicionamos la busqueda a mostrar aquellos que sean marca Ford</span>
+  <span class="token class-name"><span class="token namespace">garaje<span class="token punctuation">.</span></span>Stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>coche <span class="token operator">-&gt;</span> coche<span class="token punctuation">.</span><span class="token function">getMarca</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;Ford&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p><a name="subcolecciones" href></a></p>
+  <h1 class="mume-header" id="obtenci%C3%B3n-de-subcolecciones">Obtenci&#xF3;n de subcolecciones</h1>
+  
+  <p>Entendemos como subcolecci&#xF3;n un nuevo ArrayList de menor longitud que el ArrayList original y cuyos elementos se encuentran ordenados (o no) en la misma posici&#xF3;n relativa en ambos. Para obtenerlos podemos aplicar lo aprendido en el anterior punto <code>B&#xFA;squeda de elementos</code> donde buscaremos elemento a elemento y, cuando se cumpla una condici&#xF3;n especificada, a&#xF1;adir los elementos encontrados a una nueva coleccion (o subcolecci&#xF3;n) tal y como se ha aprendido en <code>A&#xF1;adir datos a la colecci&#xF3;n</code>.</p>
+  <p><a name="ordenar" href></a></p>
+  <h1 class="mume-header" id="ordenaci%C3%B3n-de-elementos">Ordenaci&#xF3;n de elementos</h1>
+  
+  <h3 class="mume-header" id="con-funciones-de-collection">Con funciones de Collection</h3>
+  
+  <p>Para la ordenaci&#xF3;n del ArrayList con la clase <code>Collections</code> implementamos la colecci&#xF3;n de la siguiente manera:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Iniciamos la colecci&#xF3;n</span>
+  <span class="token keyword keyword-import">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Collections</span><span class="token punctuation">;</span>
+  </pre><p>Esta clase consta exclusivamente de m&#xE9;todos est&#xE1;ticos que operan o devuelven colecciones. Para la ordenaci&#xF3;n de elementos, utilizaremos el m&#xE9;todo <code>.sort()</code> contenido en la clase <code>Collections</code>, el cual implementa 2 sobrecargas:</p>
+  <p>&#x270F;&#xFE0F; <strong>.sort(List<t> list)</t></strong></p>
+  <p>Ordena la lista especificada en orden ascendente, seg&#xFA;n el orden natural de sus elementos:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>garaje<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  garaje<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p>&#x1F6AB; &#x26A0;&#xFE0F;&#xA1;OJO!&#x26A0;&#xFE0F; &#x1F6AB; Esto no va a funcionar porque el m&#xE9;todo <code>.sort()</code> se puede utilizar de esta manera s&#xF3;lo con tipos primitivos (String, Integer, float...). Para que funcione con un Arraylist de objetos, hemos de utlizar la interfaz <code>Comparator</code>. Lo vemos en el siguiente punto &#x2B07;&#xFE0F;</p>
+  <p>&#x270F;&#xFE0F; <strong>.sort(List<t> list, Comparator&lt;? super T&gt; c)</t></strong></p>
+  <p>Existen clases comparadoras predefinidas que nos permiten ordenar de alguna otra forma los ArrayList de tipos primitivos. Una de ellas muy utilizada es <code>Collections.reverseOrder()</code>, la cual permite ordenar de forma descendente un ArrayList. Vamos a hacer un ejemplo fuera de la linea de este manual -ya que este manual se est&#xE1; realizando sobre el objeto <code>Coche</code>- para que se vea:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> lenguajesProgramacion <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     
-        <ul>
-          <li><a href="#%C3%ADndice">&#xCD;ndice</a></li>
-          <li><a href="#definici%C3%B3n-y-creaci%C3%B3n-de-un-arraylist">Definici&#xF3;n y creaci&#xF3;n de un ArrayList</a>
-          </li>
-          <li><a href="#m%C3%A9todos-y-propiedades-generales">M&#xE9;todos y propiedades generales</a></li>
-          <li><a href="#a%C3%B1adir-datos-a-la-colecci%C3%B3n">A&#xF1;adir datos a la colecci&#xF3;n</a></li>
-          <li><a href="#recorrer-la-colecci%C3%B3n">Recorrer la colecci&#xF3;n</a></li>
-          <li><a href="#b%C3%BAsqueda-de-elementos">B&#xFA;squeda de elementos</a></li>
-          <li><a href="#obtenci%C3%B3n-de-subcolecciones">Obtenci&#xF3;n de subcolecciones</a></li>
-          <li><a href="#ordenaci%C3%B3n-de-elementos">Ordenaci&#xF3;n de elementos</a></li>
-          <li><a href="#webgraf%C3%ADa">Webgraf&#xED;a</a></li>
-        </ul>
-        <p><a name="definicion" href></a></p>
-        <h1 class="mume-header" id="definici%C3%B3n-y-creaci%C3%B3n-de-un-arraylist">Definici&#xF3;n y creaci&#xF3;n de un
-          ArrayList</h1>
+          lenguajesProgramacion<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">&quot;Java&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          lenguajesProgramacion<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">&quot;C#&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          lenguajesProgramacion<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">&quot;Go&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          lenguajesProgramacion<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">&quot;Phyton&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          lenguajesProgramacion<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">&quot;PHP&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     
-        <p>La clase ArrayList en Java permite almacenar datos en memoria de forma similar a los Arrays con la ventaja de que
-          el numero de elementos que almacena lo hace de forma <strong>din&#xE1;mica</strong>, es decir, que <strong>no es
-            necesario declarar su tama&#xF1;o como pasa con los Arrays.</strong> Los elementos pueden a&#xF1;adirse o
-          eliminarse seg&#xFA;n necesidad.</p>
-        <p>La clase Arraylist implementa la interface List, la cual extiende la interface <code>java.util.Collection</code>.
-        </p>
-        <p><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200624184403/ArrayList.png"
-            alt="Esquema ArrayList - Collection"></p>
-        <p>Para crear un ArrayList, podemos importar o bien solo la clase <code>java.util.ArrayList</code> o todo el paquete
-          <code>java.util</code>. Un ArrayList se puede declarar de diferentes elementos u objetos (String, Integer, float,
-          Boolean, Object...).</p>
-        <p>Para el ejemplo que vamos a seguir en este manual, declararemos un objeto ArrayList al que llamaremos
-          <em>coches</em> y en el que almacenaremos strings de la siguiente manera:</p>
-        <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token keyword keyword-import">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span><span class="token punctuation">;</span> <span class="token comment">// Importamos la clase ArrayList</span>
+          <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;ArrayList no ordenado: &quot;</span>
+                             <span class="token operator">+</span> lenguajesProgramacion<span class="token punctuation">)</span><span class="token punctuation">;</span>
     
-    <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> coches <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Creamos el objeto ArrayList</span>
-    </pre>
-        <p><a name="metodos_y_propiedades" href></a></p>
-        <h1 class="mume-header" id="m%C3%A9todos-y-propiedades-generales">M&#xE9;todos y propiedades generales</h1>
+          <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>lenguajesProgramacion<span class="token punctuation">,</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">reverseOrder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     
-        <p><a name="a&#xF1;adir" href></a></p>
-        <h1 class="mume-header" id="a%C3%B1adir-datos-a-la-colecci%C3%B3n">A&#xF1;adir datos a la colecci&#xF3;n</h1>
-    
-        <p><a name="recorrer" href></a></p>
-        <h1 class="mume-header" id="recorrer-la-colecci%C3%B3n">Recorrer la colecci&#xF3;n</h1>
-    
-        <p><a name="buscar" href></a></p>
-        <h1 class="mume-header" id="b%C3%BAsqueda-de-elementos">B&#xFA;squeda de elementos</h1>
-    
-        <p><a name="subcolecciones" href></a></p>
-        <h1 class="mume-header" id="obtenci%C3%B3n-de-subcolecciones">Obtenci&#xF3;n de subcolecciones</h1>
-    
-        <p><a name="ordenar" href></a></p>
-        <h1 class="mume-header" id="ordenaci%C3%B3n-de-elementos">Ordenaci&#xF3;n de elementos</h1>
-    
-        <p><a name="webgraf&#xED;a" href></a></p>
-        <h1 class="mume-header" id="webgraf%C3%ADa">Webgraf&#xED;a</h1>
-    
-        <ul>
-          <li><a
-              href="https://www.geeksforgeeks.org/arraylist-in-java/?ref=lbp">https://www.geeksforgeeks.org/arraylist-in-java/?ref=lbp</a>
-          </li>
-          <li><a
-              href="https://www.w3schools.com/java/java_arraylist.asp">https://www.w3schools.com/java/java_arraylist.asp</a>
-          </li>
-          <li><a href="https://guru99.es/how-to-use-arraylist-in-java/">https://guru99.es/how-to-use-arraylist-in-java/</a>
-          </li>
-          <li><a
-              href="https://www.javadevjournal.com/java/java-arraylist/">https://www.javadevjournal.com/java/java-arraylist/</a>
-          </li>
-        </ul>
-    
-      </div>
+          <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Array ordenado de forma descendente: &quot;</span> <span class="token operator">+</span> lenguajesProgramacion<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p>Para ordenar un ArrayList de objetos no primitivos, hemos de crear una clase vac&#xED;a que implementar&#xE1; la interfaz <code>Comparator</code> y en la que dise&#xF1;aremos el c&#xF3;digo de comparaci&#xF3;n de dos objetos. Primero importamos la clase <code>Comparator</code> con <code>import java.util.Comparator;</code> y a continuaci&#xF3;n escribimos:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token keyword keyword-public">public</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">CompararCoches</span> <span class="token keyword keyword-implements">implements</span> <span class="token class-name">Comparator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">{</span>
+       
+       <span class="token annotation punctuation">@Override</span>
+       <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-int">int</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token class-name">Coche</span> coche1<span class="token punctuation">,</span> <span class="token class-name">Coche</span> coche2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+          <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>coche1<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&lt;</span>coche2<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+              <span class="token keyword keyword-return">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token keyword keyword-else">else</span> <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>coche1<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&lt;</span>coche2<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+              <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token keyword keyword-else">else</span><span class="token punctuation">{</span>
+              <span class="token keyword keyword-return">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>     
+  <span class="token punctuation">}</span>
+  </pre><p>De esta manera, nos permitir&#xE1; ordenar el ArrayList <code>garaje</code> por precio ascendente de los coches o por cualquier atributo de la clase <code>Coche</code>:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>garaje<span class="token punctuation">,</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">CompararCoches</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  garaje<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>coche<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><h3 class="mume-header" id="con-expresiones-lambda">Con expresiones lambda</h3>
+  
+  <p>El uso de expresiones lambda nos permite simplificar el anterior c&#xF3;digo sin tener que incluir la clase <code>CompararCoches</code>. Esta clase, con una expresi&#xF3;n lambda pasar&#xED;a de esto:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token keyword keyword-public">public</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">CompararCoches</span> <span class="token keyword keyword-implements">implements</span> <span class="token class-name">Comparator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">{</span>
+       
+       <span class="token annotation punctuation">@Override</span>
+       <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-int">int</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token class-name">Coche</span> coche1<span class="token punctuation">,</span> <span class="token class-name">Coche</span> coche2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+          <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>coche1<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&lt;</span>coche2<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+              <span class="token keyword keyword-return">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token keyword keyword-else">else</span> <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>coche1<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&lt;</span>coche2<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+              <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token keyword keyword-else">else</span><span class="token punctuation">{</span>
+              <span class="token keyword keyword-return">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>     
+  <span class="token punctuation">}</span>
+  </pre><p>a esto:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token punctuation">(</span><span class="token class-name">Coche</span> coche1<span class="token punctuation">,</span> <span class="token class-name">Coche</span> coche2<span class="token punctuation">)</span><span class="token operator">-&gt;</span>coche1<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>coche2<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p>Por tanto se escribir&#xED;a el c&#xF3;digo de esta forma:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java">garaje<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Coche</span> coche1<span class="token punctuation">,</span> <span class="token class-name">Coche</span> coche2<span class="token punctuation">)</span><span class="token operator">-&gt;</span>coche1<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>coche2<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p>Y para ordenar por orden inverso, s&#xF3;lo deber&#xED;amos de cambiar el orden de los coches:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java">garaje<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Coche</span> coche1<span class="token punctuation">,</span> <span class="token class-name">Coche</span> coche2<span class="token punctuation">)</span><span class="token operator">-&gt;</span>coche2<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>coche1<span class="token punctuation">.</span><span class="token function">getPrecio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><h3 class="mume-header" id="con-api-stream">Con API Stream</h3>
+  
+  <p>Ordenar un ArrayList con la programaci&#xF3;n funcional que nos permite API Stream es mucho m&#xE1;s sencillo en el caso de un ArrayList de objetos, pero debemos hacerlo a una lista auxiliar. Para ello inicializaremos con <code>.stream()</code>, ordenaremos con <code>.sorted()</code> y escribiremos con <code>.collect(Collectors.toList())</code> en la nueva lista:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span> nuevoGaraje <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sorted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  nuevoGaraje<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Coche</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">Coche</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p>Interesante indicar dos funcionalidades m&#xE1;s: orden invertido con <code>Comparator.reverseOrder()</code> y comparar por atributo con <code>Comparator.comparing(Class::getter)</code>:</p>
+  <pre data-role="codeBlock" data-info="Java" class="language-java"><span class="token comment">// Con Comparator.reverseOrder()</span>
+  <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span> nuevoGaraje <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                                  <span class="token punctuation">.</span><span class="token function">sorted</span><span class="token punctuation">(</span><span class="token class-name">Comparator</span><span class="token punctuation">.</span><span class="token function">reverseOrder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                                  <span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  nuevoGaraje<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Coche</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">Coche</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Con Comparator.comparing(Class::getter)</span>
+  <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Coche</span><span class="token punctuation">&gt;</span></span> nuevoGaraje <span class="token operator">=</span> garaje<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                                  <span class="token punctuation">.</span><span class="token function">sorted</span><span class="token punctuation">(</span><span class="token class-name">Comparator</span><span class="token punctuation">.</span><span class="token function">comparing</span><span class="token punctuation">(</span><span class="token class-name">Coche</span><span class="token operator">::</span><span class="token function">getPrecio</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                                                    <span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  nuevoGaraje<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Coche</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">Coche</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </pre><p><a name="webgraf&#xED;a" href></a></p>
+  <h1 class="mume-header" id="webgraf%C3%ADa">Webgraf&#xED;a</h1>
+  
+  <ul>
+  <li><a href="https://www.geeksforgeeks.org/arraylist-in-java/?ref=lbp">https://www.geeksforgeeks.org/arraylist-in-java/?ref=lbp</a></li>
+  <li><a href="https://www.w3schools.com/java/java_arraylist.asp">https://www.w3schools.com/java/java_arraylist.asp</a></li>
+  <li><a href="https://guru99.es/how-to-use-arraylist-in-java/">https://guru99.es/how-to-use-arraylist-in-java/</a></li>
+  <li><a href="https://www.javadevjournal.com/java/java-arraylist/">https://www.javadevjournal.com/java/java-arraylist/</a></li>
+  <li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html</a></li>
+  <li><a href="https://www.discoduroderoer.es/formas-de-ordenar-un-arraylist/">https://www.discoduroderoer.es/formas-de-ordenar-un-arraylist/</a></li>
+  <li><a href="https://www.baeldung.com/java-sorting">https://www.baeldung.com/java-sorting</a></li>
+  <li><a href="https://www.javatpoint.com/how-to-sort-arraylist-in-java">https://www.javatpoint.com/how-to-sort-arraylist-in-java</a></li>
+  </ul>
+  
+        </div>
 
       <!-- Fin de Markdown -->
-      
+
     </div>
   </div>
 
