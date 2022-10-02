@@ -19,4 +19,4 @@ Este manual incluye:
     - Con API Stream
 - Webgrafía
 
-Desarrollado en HTML, CSS y JS con posibilidad de ampliación.
+> Desarrollado en HTML, CSS y JS con posibilidad de ampliación.
