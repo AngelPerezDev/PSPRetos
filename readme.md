@@ -23,4 +23,4 @@ Este manual incluye:
     - Con API Stream
 - Webgrafía
 
-!(https://raw.githubusercontent.com/AngelPerezDev/PSPRetos/main/webHome.PNG)
+![](https://raw.githubusercontent.com/AngelPerezDev/PSPRetos/main/webHome.PNG)
